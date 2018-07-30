@@ -25,7 +25,7 @@ SECRET_KEY = 'mqh+8)n+07-zj-m4k_cro^60wtw60fq-$r(0d5^r!hhbaiq=r!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['onexpredict.herokuapp.com', 'www.1xpredict.com']
 
 
 # Application definition
@@ -130,3 +130,14 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/homeVip'
 
 LOGOUT_REDIRECT_URL = '/home'
+
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(os.path.normpath(BASE_DIR), "static")
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
