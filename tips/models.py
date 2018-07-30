@@ -1,0 +1,157 @@
+from django.db import models
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
+from django.utils import timezone
+import datetime
+
+class Profile(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    join_vip = models.DateTimeField(auto_now_add=True, null = True)
+
+    def __str__(self):  # __unicode__ for Python 2
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+class Ticket(models.Model):
+
+    ONLINE_CHOICES = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+    )
+
+    ticket = models.CharField(max_length=150, null = True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=ONLINE_CHOICES, default='draft')
+
+    def __str__(self):
+        return self.ticket
+
+class FreeTipsGame(models.Model):
+    STATUS_CHOICES = (
+        ('Running', 'Running'),
+        ('Won', 'Won'),
+        ('Lost', 'Lost'),
+    )
+
+    date_added = models.DateTimeField(auto_now_add=True, null = True)
+
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null = True)
+
+    country = models.CharField(max_length = 200, null = True)
+
+    home_team = models.CharField(max_length = 200, null = True)
+
+    home_score = models.PositiveIntegerField(default = 0)
+
+    away_score = models.PositiveIntegerField(default = 0)
+
+    away_team = models.CharField(max_length = 200, null = True)
+
+    prediction = models.CharField(max_length = 100, null = True)
+
+    odds = models.CharField(max_length = 100, null = True, blank = True)
+
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='running')
+
+    def __str__(self):
+       return str(self.home_team)
+
+
+
+class VipTipsGame(models.Model):
+    STATUS_CHOICES = (
+        ('Running', 'Running'),
+        ('Won', 'Won'),
+        ('Lost', 'Lost'),
+    )
+
+    date_added = models.DateTimeField(auto_now_add=True, null = True)
+
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null = True)
+
+    country = models.CharField(max_length = 200, null = True)
+
+    home_team = models.CharField(max_length = 200, null = True)
+
+    home_score = models.PositiveIntegerField(default = 0)
+
+    away_score = models.PositiveIntegerField(default = 0)
+
+    away_team = models.CharField(max_length = 200, null = True)
+
+    prediction = models.CharField(max_length = 100, null = True)
+
+    odds = models.CharField(max_length = 100, null = True, blank = True)
+
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='running')
+
+    def __str__(self):
+       return str(self.home_team)
+
+class PunterTipsGame(models.Model):
+    STATUS_CHOICES = (
+        ('Running', 'Running'),
+        ('Won', 'Won'),
+        ('Lost', 'Lost'),
+    )
+
+    date_added = models.DateTimeField(auto_now_add=True, null = True)
+
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null = True)
+
+    country = models.CharField(max_length = 200, null = True)
+
+    home_team = models.CharField(max_length = 200, null = True)
+
+    home_score = models.PositiveIntegerField(default = 0)
+
+    away_score = models.PositiveIntegerField(default = 0)
+
+    away_team = models.CharField(max_length = 200, null = True)
+
+    prediction = models.CharField(max_length = 100, null = True)
+
+    odds = models.CharField(max_length = 100, null = True, blank = True)
+
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='running')
+
+    def __str__(self):
+       return str(self.home_team)
+
+class RollTipsGame(models.Model):
+    STATUS_CHOICES = (
+        ('Running', 'Running'),
+        ('Won', 'Won'),
+        ('Lost', 'Lost'),
+    )
+
+    date_added = models.DateTimeField(auto_now_add=True, null = True)
+
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null = True)
+
+    country = models.CharField(max_length = 200, null = True)
+
+    home_team = models.CharField(max_length = 200, null = True)
+
+    home_score = models.PositiveIntegerField(default = 0)
+
+    away_score = models.PositiveIntegerField(default = 0)
+
+    away_team = models.CharField(max_length = 200, null = True)
+
+    prediction = models.CharField(max_length = 100, null = True)
+
+    odds = models.CharField(max_length = 100, null = True, blank = True)
+
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='running')
+
+    def __str__(self):
+       return str(self.home_team)

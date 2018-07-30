@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 1XPredict Free Tips {% endblock %}
+{% block content %}
+
+{% include "contact.html" %}
+
+{% regroup home_page_teams by ticket as ticket_list %}
+
+
+ {% for ticket in ticket_list %}
+
+  {% if forloop.first %}
+
+  <font style="color:green"><h5>{{ ticket.grouper }}</h5></font>
+
+<div style="overflow-x:auto;">
+<table border="2" cellpadding = "5">
+<br>
+<tr style='background-color: indigo'>
+<th style='color: white'>Country</th>
+<th style='color: white'>Home Team</th>
+<th style='color: white'>Score</th>
+<th style='color: white'>Away Team</th>
+<th style='color: white'>Prediction</th>
+<th style='color: white'>Odds</th>
+<th style='color: white'>Status</th>
+</tr>
+
+  {% for item in ticket.list %}
+
+  <tr>
+      <td style='background-color: plum;' >{{ item.country }}</td>
+
+      <td >{{ item.home_team }}</td>
+
+      <td style='background-color: plum;' >{{ item.home_score}} - {{ item.away_score }}</td>
+
+      <td>{{ item.away_team }}</td>
+
+      <td style='background-color: plum;' >{{ item.prediction}}</td>
+
+      <td>{{ item.odds}}</td>
+
+      {% if item.status == 'Lost' %}
+
+      <td style='background-color: #FF5733;'>{{ item.status}}</td>
+
+      {% elif item.status == 'Won' %}
+
+      <td style='background-color: Limegreen;' >{{ item.status}}</td>
+
+      {% else %}
+
+      <td >{{ item.status}}</td>
+
+      {% endif %}
+
+
+  </tr>
+  {% endfor %}
+</table>
+</div>
+  {% endif %}
+
+  {% endfor %}
+
+  <div class="w3-row-padding" align = "center">
+
+    <div class="w3-third">
+      <br>
+      <div class="card" style="width: 18rem;">
+      <img src="{% static "img/play.png"  %}">
+      <div class="card-body">
+        <p class="card-text">The App is extremely internet and bundle friendly, thus placing at your fingertips the opportunity to access more for less money. It is faster, cheaper and always with you everywhere, anytime.</p>
+        <a href="/play/" class="btn btn-primary">Download it here</a>
+      </div>
+    </div>
+    <br>
+    </div>
+
+    <div class="w3-third">
+      <br>
+      <div class="card" style="width: 18rem;">
+     <img src="{% static "img/r0tEOsTe_400x400.jpg"  %}">
+      <div class="card-body">
+        <br>
+        <p class="card-text">We give 3 odds to our vip subscribers.As 1XPredict we prefer low odds and win daily than giving out high odds and be loosing.</p>
+     <a href="/subscribe/" class="btn btn-primary">Subscribe</a>
+      </div>
+    </div>
+  <br>
+  </div>
+
+  <div class="w3-third">
+<br>
+<div class="card" style="width: 18rem;">
+<img src="{% static "img/login.png"  %}">
+<div class="card-body">
+  <p class="card-text"><br>1) Register an accout<br><br>
+  2) Make your payment<br><br>
+3) Login to vip site</p>
+
+  <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4096080,4,2047,280,25,00011111']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4096080&101" alt="free web site hit counter" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+</div>
+</div>
+
+    <br>
+
+  </div>
+  </div>
+
+{% endblock %}
