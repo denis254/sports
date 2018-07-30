@@ -1,32 +1,21 @@
 {% load static %}
-<nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0px; background-color: #66B447;">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="container-fluid">
-      <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="/home/" style="color: #ffffff; font-weight: bolder">1XPredict</a>
-  </div>
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="w3-bar  w3-blue w3-padding-16 w3-large">
+  <a href="/home/" class="w3-bar-item w3-button"><b>
+    <font style="color:white">1XPredict</font></b></a>
+    <a href="/register/"style="float:right" class="w3-bar-item w3-button w3-hide-small"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</a>
+    <a href="/accounts/login/"style="float:right" class="w3-bar-item w3-button w3-hide-small"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a>
+    <a href="/subscribe/"style="float:right" class="w3-bar-item w3-button w3-hide-small">Subscribe</a>
+    <a href="/results/"style="float:right" class="w3-bar-item w3-button w3-hide-small">Results</a>
+    <a href="/home/" style="float:right" class="w3-bar-item w3-button w3-hide-small">Free Predictions</a>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-          <li class="divider"></li>
-          <li><a href="/home/" style="color: #ffffff"><b>Free Predictions</b></a></li>
-          <li><a href="/results/" style="color: #ffffff"><b>Results</b></a></li>
-          <li><a href="/subscribe/" style="color: #ffffff"><b>Subscribe</b></a></li>
-          <li><a href="/accounts/login/" style="color: #ffffff"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> <b> Login</b></a></li>
-          <li><a href="/register/" style="color: #ffffff"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <b> Register</b></a></li>
-        </ul>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+</div>
 
-      </li>
-    </ul>
-  </div><!-- /.navbar-collapse -->
-  </div>
-</nav>
+<div id="demo" class="w3-bar-block w3-blue w3-hide w3-hide-large w3-hide-medium">
+  <a href="/home/" class="w3-bar-item w3-button">Free Predictions</a>
+  <a href="/results/" class="w3-bar-item w3-button">Results</a>
+  <a href="/subscribe/" class="w3-bar-item w3-button">Subscribe</a>
+  <a href="/accounts/login/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a>
+  <a href="/register/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</a>
+</div>
