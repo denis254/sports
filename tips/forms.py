@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Profile
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required = True, help_text='Required.')
@@ -25,7 +26,12 @@ class RegistrationForm(UserCreationForm):
         #note password is saved automatically in User models original save()
         # function, everything else needs to be done manually as done above
         if commit:
-            user.is_active = False
+            user.is_active = True
             user.save()
 
             return user
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('state',)

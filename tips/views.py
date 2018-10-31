@@ -1,68 +1,15 @@
 from django.shortcuts import render, redirect
-from . models import FreeTipsGame, VipTipsGame, RollTipsGame, PunterTipsGame
+from . models import FreeTipsGame, vipTipsGame, punterTipsGame
 from django.utils import timezone
 from . forms import RegistrationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
-def play(request):
-    return redirect("https://play.google.com/store/apps/details?id=com.a1xpredict.a1xpredict")
-
-@login_required()
-def vipTips(request):
-
-    model = FreeTipsGame
-
-    template_name = 'vipTips.html'
-
-    args = {}
-
-    home_page_teams = VipTipsGame.objects.filter(
-        date_added__lte=timezone.now()
-    ).order_by('-date_added')
-
-    args ['home_page_teams'] = home_page_teams
-
-    return render(request, "vipTips/vip.html", args)
-
-@login_required()
-def punter(request):
-
-    model = FreeTipsGame
-
-    template_name = 'punter.html'
-
-    args = {}
-
-    home_page_teams = PunterTipsGame.objects.filter(
-        date_added__lte=timezone.now()
-    ).order_by('-date_added')
-
-    args ['home_page_teams'] = home_page_teams
-
-    return render(request, "vipTips/punter.html", args)
-
-@login_required()
-def roll(request):
-
-    model = FreeTipsGame
-
-    template_name = 'roll.html'
-
-    args = {}
-
-    home_page_teams = RollTipsGame.objects.filter(
-        date_added__lte=timezone.now()
-    ).order_by('-date_added')
-
-    args ['home_page_teams'] = home_page_teams
-
-    return render(request, "vipTips/roll.html", args)
-
+#Today's Free tips method
 def home(request):
 
     model = FreeTipsGame
 
-    template_name = 'freeTips.html'
+    template_name = 'home.html'
 
     args = {}
 
@@ -72,13 +19,14 @@ def home(request):
 
     args ['home_page_teams'] = home_page_teams
 
-    return render(request, "freeTips/home.html", args)
+    return render(request, 'free/home.html', args)
 
+#Free tips results method
 def results(request):
 
     model = FreeTipsGame
 
-    template_name = 'results.html'
+    template_name = 'free/results.html'
 
     args = {}
 
@@ -88,22 +36,15 @@ def results(request):
 
     args ['home_page_teams'] = home_page_teams
 
-    return render(request, "freeTips/results.html", args)
+    return render(request, 'free/results.html', args)
 
-def subscribe(request):
+def payment(request):
+    return render(request, 'free/payment.html')
 
-    return render(request, "freeTips/subscribe.html")
+def viptips(request):
+    return render(request, 'free/viptips.html')
 
-def information(request):
-
-    return render(request, "register/information.html")
-
-@login_required()
-def viphome(request):
-
-    return render(request, "vipTips/vip_home.html")
-
-def register(request):
+def signup(request):
 
     if request.method == 'POST':
 
@@ -115,10 +56,44 @@ def register(request):
 
             user.save()
 
-            return redirect('/information/')
+            messages.success(request, 'Registration successful.You can now log in with your username and password')
+
+            return redirect('/accounts/login')
 
     else:
         form = RegistrationForm()
 
 
-    return render(request, 'register/register.html', {'form':form})
+    return render(request, 'free/signup.html', {'form':form})
+
+def viptipsgames(request):
+
+    model = vipTipsGame
+
+    template_name = 'viptipsgames.html'
+
+    args = {}
+
+    home_page_teams = vipTipsGame.objects.filter(
+        date_added__lte=timezone.now()
+    ).order_by('-date_added')
+
+    args ['home_page_teams'] = home_page_teams
+
+    return render(request, 'free/viptipsgames.html', args)
+
+def punterpick(request):
+
+    model = punterTipsGame
+
+    template_name = 'punterpick.html'
+
+    args = {}
+
+    home_page_teams = punterTipsGame.objects.filter(
+        date_added__lte=timezone.now()
+    ).order_by('-date_added')
+
+    args ['home_page_teams'] = home_page_teams
+
+    return render(request, 'free/punterpick.html', args)
